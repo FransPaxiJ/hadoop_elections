@@ -35,23 +35,6 @@ hadoop_elections_real/
 └── slides_tradeoffs.md
 ```
 
-## Diagrama de diseño
-
-```mermaid
-flowchart LR
-  onpeCsv[ONPECsvInput] --> normalizeStep[NormalizeColumnsStep]
-  normalizeStep --> hdfsInput[HDFSInputPath]
-  hdfsInput --> mapperNational[MapperCandidateVotes]
-  hdfsInput --> mapperDept[MapperDeptCandidateVotes]
-  mapperNational --> shuffleNational[ShuffleSortNational]
-  mapperDept --> shuffleDept[ShuffleSortDepartment]
-  shuffleNational --> reducerNational[ReducerSumVotes]
-  shuffleDept --> reducerDept[ReducerSumVotes]
-  reducerNational --> nationalResult[CandidateTotals]
-  reducerDept --> deptResult[DepartmentCandidateTotals]
-  nationalResult --> finalReport[WinnerAndPercentages]
-```
-
 ## Cómo ejecutar
 
 ### 1) Ir al proyecto
