@@ -1,0 +1,66 @@
+name: hadoop-elections
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-elections-namenode
+    restart: unless-stopped
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+    environment:
+      - CLUSTER_NAME=local-elections
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - namenode_data:/hadoop/dfs/name
+      - ./data:/data
+      - ./mapreduce:/mapreduce
+      - ./output:/output
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-elections-datanode
+    restart: unless-stopped
+    depends_on:
+      - namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - datanode_data:/hadoop/dfs/data
+      - ./data:/data
+      - ./mapreduce:/mapreduce
+      - ./output:/output
+
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-elections-resourcemanager
+    restart: unless-stopped
+    depends_on:
+      - namenode
+      - datanode
+    env_file:
+      - ./hadoop.env
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./data:/data
+      - ./mapreduce:/mapreduce
+      - ./output:/output
+
+  nodemanager:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop-elections-nodemanager
+    restart: unless-stopped
+    depends_on:
+      - resourcemanager
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - ./data:/data
+      - ./mapreduce:/mapreduce
+      - ./output:/output
+
+volumes:
+  namenode_data:
+  datanode_data:
