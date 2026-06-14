@@ -2,7 +2,7 @@
 
 ---
 
-## Slide 1 — Problema y dataset
+## Problema y dataset
 
 - Caso real: resultados presidenciales Perú 2021 (primera vuelta)
 - Fuente: ONPE en datos abiertos
@@ -17,7 +17,7 @@
 
 ---
 
-## Slide 2 — Diseño de solución
+## Diseño de solución
 
 - HDFS para almacenamiento distribuido de entrada y salida
 - MapReduce Streaming para agregaciones por clave
@@ -28,7 +28,7 @@ Flujo: ONPE CSV -> normalización -> HDFS -> map -> shuffle/sort -> reduce -> re
 
 ---
 
-## Slide 3 — Mapper y Reducer en este caso
+## Mapper y Reducer en este caso
 
 - Mapper nacional: emite `(candidato, total_votos)`
 - Mapper por región: emite `(departamento|candidato, total_votos)`
@@ -39,7 +39,7 @@ Flujo: ONPE CSV -> normalización -> HDFS -> map -> shuffle/sort -> reduce -> re
 
 ---
 
-## Slide 4 — Tradeoffs de la tecnología
+## Tradeoffs de la tecnología
 
 **Ventajas**
 
@@ -55,7 +55,7 @@ Flujo: ONPE CSV -> normalización -> HDFS -> map -> shuffle/sort -> reduce -> re
 
 ---
 
-## Slide 5 — ¿Cuándo Hadoop vs Python?
+## ¿Cuándo Hadoop vs Python?
 
 Hadoop conviene cuando:
 
@@ -70,7 +70,7 @@ Python/pandas conviene cuando:
 
 ---
 
-## Slide 6 — Resultado final del proyecto
+## Resultado final del proyecto
 
 Entregables generados:
 
@@ -86,6 +86,6 @@ Salida final visible en notebook/console:
 
 ---
 
-## Slide 7 — Conclusión
+## Conclusión
 
 Este proyecto muestra que Hadoop sigue siendo útil para enseñar arquitectura distribuida, incluso cuando el caso de estudio puede correrse localmente: el valor está en el diseño escalable y en separar almacenamiento distribuido (HDFS) de cómputo distribuido (MapReduce).
