@@ -25,19 +25,6 @@ hadoop_elections/
 └── README.md
 ```
 
-## Diagrama de diseño
-
-```mermaid
-flowchart LR
-  citySources[CityCsvSources] --> localFiles[LocalRawCsvFiles]
-  localFiles --> hdfsIngest[HdfsInputPath]
-  hdfsIngest --> mapPhase[MapperVoteAggregation]
-  mapPhase --> shuffleSort[ShuffleSortByKey]
-  shuffleSort --> reducePhase[ReducerVoteTotals]
-  reducePhase --> resultFiles[HdfsResultFiles]
-  resultFiles --> finalReport[FinalWinnerReport]
-```
-
 ## Cómo ejecutar
 
 ### 1. Entrar al directorio del proyecto
